@@ -20,7 +20,7 @@ int BinarySearch(int key)
 			return -1;
 	}
 }
-int foo(int fnumber, int snumber, bool* boolarr)
+int foo(int fnumber, int snumber, std::vector<bool>& numbers)
 {
 	int right = 0;
 	int left = 0;
@@ -33,10 +33,27 @@ int foo(int fnumber, int snumber, bool* boolarr)
 		return count;
 	for (int k = right; k <= left; k++)
 	{
-		if (boolarr[Data[k]])
+		if (numbers[Data[k]])
 			count += 1;
 	}
 	return count;
+}
+
+void get_numbers(std::vector<bool>& numbers, int N)
+{
+	numbers.resize(N+1);
+	for (int i = 0; i < N + 1; i++)
+		numbers[i] = true;
+	numbers[0] = false;
+	numbers[1] = false;
+	for (long long p = 2; p < N + 1; p++)
+	{
+		if (numbers[p] != false)
+		{
+			for (long long j = p * p; j < N + 1; j += p)
+				numbers[j] = false;
+		}
+	}
 }
 
 
@@ -44,27 +61,13 @@ int main(int argc, char* argv[])
 {
 	if ((!(argc % 2)) || (argc == 1))
 		return -1;
-	bool *a = new bool[Size + 1];
-	for (int i = 0; i < Size + 1; i++)
-		a[i] = true;
-	a[1] = false;
-	for (long long p = 2; p < Size + 1; p++)
+	std::vector<bool> a;
+	get_numbers(a, Size);
+	for (int i = 1; i < argc - 1; i += 2)
 	{
-		if (a[p] != false)
-		{
-			for (long long j = p * p; j < Size + 1; j += p)
-				a[j] = false;
-		}
-	}
-	std::vector<int> ivector;
-	for (int i = 1; i < argc; ++i)
-	{
-		int v = std::atoi(argv[i]);
-		ivector.push_back(v);
-	}
-	for (int i = 0; i < argc - 2; i += 2)
-	{
-		std::cout << foo(ivector[i], ivector[i + 1], a) << std::endl;
+		int v1 = std::atoi(argv[i]);
+		int v2 = std::atoi(argv[i + 1]);
+		std::cout << foo(v1, v2, a) << std::endl;
 	}
 	return 0;
 }
