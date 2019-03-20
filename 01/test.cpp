@@ -7,7 +7,7 @@ int BinarySearch(int key)
 	int left = 0;
 	int right = Size - 1;
 	int midd = 0;
-	while (1)
+	while (true)
 	{
 		midd = (left + right) / 2;
 		if (key < (Data[midd]))       // если искомое меньше значения в ячейке
@@ -20,7 +20,7 @@ int BinarySearch(int key)
 			return -1;
 	}
 }
-int foo(int fnumber, int snumber, std::vector<bool>& numbers)
+int get_counter(int fnumber, int snumber, std::vector<bool>& numbers)
 {
 	int right = 0;
 	int left = 0;
@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
 	{
 		int v1 = std::atoi(argv[i]);
 		int v2 = std::atoi(argv[i + 1]);
-		std::cout << foo(v1, v2, a) << std::endl;
+		std::cout << get_counter(v1, v2, a) << std::endl;
 	}
 	return 0;
 }
