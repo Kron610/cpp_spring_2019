@@ -52,6 +52,10 @@ private:
 					return true;
 			return false;
 		}
+		~Row()
+		{
+			row.clear();
+		}
 
 	private:
 
@@ -128,4 +132,8 @@ public:
 		return false;
 	}
 
+	~Matrix()
+	{
+		Data.clear();
+	}
 };
