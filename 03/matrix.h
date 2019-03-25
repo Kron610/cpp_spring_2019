@@ -47,14 +47,7 @@ private:
 
 		const bool operator!=(const Row& srow) const
 		{
-			for (size_t i = 0; i < Columns; i++)
-				if (row[i] != srow[i])
-					return true;
-			return false;
-		}
-		~Row()
-		{
-			row.clear();
+			return !(*this == srow);
 		}
 
 	private:
@@ -122,18 +115,7 @@ public:
 
 	const bool operator!=(const Matrix& smatr) const
 	{
-		if (this->Rows != smatr.Rows)
-			return true;
-		if (this->Columns != smatr.Columns)
-			return true;
-		for (size_t i = 0; i < Rows; i++)
-			if (Data[i] != smatr[i])
-				return true;
-		return false;
+		return !(*this == smatr);
 	}
 
-	~Matrix()
-	{
-		Data.clear();
-	}
 };
