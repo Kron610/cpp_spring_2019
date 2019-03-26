@@ -37,7 +37,7 @@ private:
 			return *this;
 		}
 
-		const bool operator==(const Row& srow) const
+		bool operator==(const Row& srow) const
 		{
 			for (size_t i = 0; i < Columns; i++)
 				if (row[i] != srow[i])
@@ -45,7 +45,7 @@ private:
 			return true;
 		}
 
-		const bool operator!=(const Row& srow) const
+		bool operator!=(const Row& srow) const
 		{
 			return !(*this == srow);
 		}
@@ -101,7 +101,7 @@ public:
 		return *this;
 	}
 
-	const bool operator==(const Matrix& smatr) const
+	bool operator==(const Matrix& smatr) const
 	{
 		if (this->Rows != smatr.Rows)
 			return false;
@@ -113,7 +113,7 @@ public:
 		return true;
 	}
 
-	const bool operator!=(const Matrix& smatr) const
+	bool operator!=(const Matrix& smatr) const
 	{
 		return !(*this == smatr);
 	}
