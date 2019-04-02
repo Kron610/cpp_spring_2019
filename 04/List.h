@@ -1,11 +1,11 @@
 ﻿#pragma once
 #include <iostream>
 
-struct ListNode
+typedef struct ListNode
 {
 	ListNode* next;
 	int element;
-};
+} ListNode;
 
 class List
 {
@@ -19,9 +19,14 @@ public:
 
 	~List()
 	{
+		Clear();
+	}
+
+	void Clear()
+	{
 		if (this->size != 0)
 		{
-			struct ListNode* cash1;
+			ListNode* cash1;
 			for (size_t i = 0; i < this->Getsize() - 1; i++)
 			{
 				cash1 = this->first;
@@ -36,7 +41,7 @@ public:
 
 	const int& operator[](size_t index) const
 	{
-		struct ListNode* List_cash = this->first;
+		ListNode* List_cash = this->first;
 		for (size_t i = 0; i < index; i++)
 		{
 			List_cash = List_cash->next;
@@ -46,7 +51,7 @@ public:
 
 	int& operator[](size_t index) 
 	{
-		struct ListNode* List_cash = this->first;
+		ListNode* List_cash = this->first;
 		for (size_t i = 0; i < index; i++)
 		{
 			List_cash = List_cash->next;
@@ -58,18 +63,18 @@ public:
 	{
 		if (this->size == 0)
 		{
-			this->first = new struct ListNode;
+			this->first = new ListNode;
 			this->first->element = item;
 			this->first->next = nullptr;
 		}
 		else
 		{
-			struct ListNode* List_cash = this->first;
+			ListNode* List_cash = this->first;
 			for (size_t i = 0; i < this->Getsize() - 1; i++)
 			{
 				List_cash = List_cash->next;
 			}
-			List_cash->next = new struct ListNode;
+			List_cash->next = new ListNode;
 			List_cash->next->element = item;
 			List_cash->next->next = nullptr;
 		}
@@ -79,7 +84,7 @@ public:
 	void Prepend(const int item)
 	{
 		this->size += 1;
-		struct ListNode* cash = new struct ListNode;
+		ListNode* cash = new ListNode;
 		cash->element = item;
 		if (this->size == 0)
 		{
@@ -94,10 +99,10 @@ public:
 
 	void InsertArt(size_t index, const int item)
 	{
-		struct ListNode* cash;
+		ListNode* cash;
 		if (index == 0)
 		{
-			cash = new struct ListNode;
+			cash = new ListNode;
 			cash->element = item;
 			cash->next = this->first;
 			this->first = cash;
@@ -107,8 +112,8 @@ public:
 			cash = this->first;
 			for (size_t i = 1; i < index; i++)
 				cash = cash->next;
-			struct ListNode* cash2;
-			cash2 = new struct ListNode;
+			ListNode* cash2;
+			cash2 = new ListNode;
 			cash2->element = item;
 			cash2->next = cash->next;
 			cash->next = cash2;
@@ -133,7 +138,7 @@ public:
 		else
 		{
 			std::cout << "Your sequence:" << std::endl;
-			struct ListNode* cash = this->first;
+			ListNode* cash = this->first;
 			std::cout << cash->element << '\t';
 			for (size_t i = 0; i < this->Getsize() - 1; i++)
 			{

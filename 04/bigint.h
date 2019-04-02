@@ -5,8 +5,11 @@
 
 class BigInt 
 {
+
 	friend std::ostream& operator <<(std::ostream& os, const BigInt& number);
+
 private:
+
 	static const int64_t base = 1000000000;
 	bool mark;
 	List Data;
@@ -22,6 +25,7 @@ private:
 	}
 
 public:
+
 	BigInt(std::string str = "")
 	{
 		if (str.length() == 0)
@@ -51,10 +55,16 @@ public:
 
 		BigInt& operator=(int64_t Int)
 	{
-		Data.~List();
-		if (Int < 0) { this->mark = false; Int = -Int; }
-		else this->mark = true;
-		do {
+		Data.Clear();
+		if (Int < 0)
+		{
+			this->mark = false;
+			Int = -Int;
+		}
+		else
+			this->mark = true;
+		do 
+		{
 			this->Data.Append(Int % base);
 			Int /= base;
 		} while (Int != 0);
@@ -63,9 +73,15 @@ public:
 
 	BigInt(int64_t Int)
 	{
-		if (Int < 0) { this->mark = false; Int = -Int; }
-		else this->mark = true;
-		do {
+		if (Int < 0) 
+		{
+			this->mark = false;
+			Int = -Int;
+		}
+		else
+			this->mark = true;
+		do
+		{
 			this->Data.Append(Int % base);
 			Int /= base;
 		} while (Int != 0);
@@ -82,7 +98,7 @@ public:
 	{
 		if (this == &number)
 			return *this;
-		this->Data.~List();
+		this->Data.Clear();
 		for (size_t i = 0; i < number.Data.Getsize(); i++)
 			Data.Append(number.Data[i]);
 		mark = number.mark;
@@ -131,7 +147,8 @@ public:
 		{
 			if (mark)
 				return (*this - (-number));
-			else return (number - (-(*this)));
+			else
+				return (number - (-(*this)));
 		}
 	}
 
@@ -139,10 +156,12 @@ public:
 	{
 		if (!(number.mark))
 			return *this + (-number);
-		else if (!(this->mark))
-			return -(-(*this) + number);
-		else if (*this < number)
-			return -(number - (*this));
+		else
+			if (!(this->mark))
+				return -(-(*this) + number);
+			else
+				if (*this < number)
+					return -(number - (*this));
 		BigInt tmp = BigInt(*this);
 		for (size_t i = 0; i < tmp.Data.Getsize(); i++)
 		{
@@ -188,7 +207,8 @@ public:
 			if (number.Data[i] != this->Data[i])
 				if (this->Data[i] > number.Data[i])
 					return !mark;
-				else return mark;
+				else
+					return mark;
 		return false;
 	}
 
