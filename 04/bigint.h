@@ -49,82 +49,26 @@ public:
 		RemoveZeroes();
 	}
 
-	BigInt& operator=(const int64_t Int)
+		BigInt& operator=(int64_t Int)
 	{
 		Data.~List();
-		if (Int < 0)
-		{
-			if (-Int > base)
-			{
-				Data.Append(-Int % base);
-				if (-Int > base*base)
-				{
-					Data.Append((-Int % (base * base)) / base);
-					Data.Append(-Int / (base * base));
-				}
-				else
-					Data.Append(-Int / base);
-			}
-			else
-				Data.Append(-Int);
-			mark = false;
-		}
-		else
-		{
-			if (Int > base)
-			{
-				Data.Append(Int % base);
-				if (Int > base*base)
-				{
-					Data.Append((Int % (base * base)) / base);
-					Data.Append(Int / (base * base));
-				}
-				else
-					Data.Append(Int / base);
-			}
-			else
-				Data.Append(Int);
-			mark = true;
-		}
+		if (Int < 0) { this->mark = false; Int = -Int; }
+		else this->mark = true;
+		do {
+			this->Data.Append(Int % base);
+			Int /= base;
+		} while (Int != 0);
 		return *this;
 	}
 
-	BigInt(const int64_t Int)
+	BigInt(int64_t Int)
 	{
-		if (Int < 0)
-		{
-			if (-Int > base)
-			{
-				Data.Append(-Int % base);
-				if (-Int > base*base)
-				{
-					Data.Append((-Int % (base * base)) / base);
-					Data.Append(-Int / (base * base));
-				}
-				else
-					Data.Append(-Int / base);
-			}
-			else
-				Data.Append(-Int);
-			mark = false;
-		}
-		else
-		{
-			if (Int > base)
-			{
-				Data.Append(Int % base);
-				if (Int > base*base)
-				{
-					Data.Append((Int % (base * base)) / base);
-					Data.Append(Int / (base * base));
-				}
-				else
-					Data.Append(Int / base);
-			}
-			else
-				Data.Append(Int);
-			mark = true;
-		}
+		if (Int < 0) { this->mark = false; Int = -Int; }
+		else this->mark = true;
+		do {
+			this->Data.Append(Int % base);
+			Int /= base;
+		} while (Int != 0);
 	}
 
 	BigInt(const BigInt& number)
