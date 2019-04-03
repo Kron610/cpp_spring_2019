@@ -26,25 +26,26 @@ private:
 
 public:
 
-	BigInt(std::string str = "")
+	BigInt(const std::string& str = "")
 	{
 		if (str.length() == 0)
 			this->mark = true;
 		else
 		{
+			int key = 0;
 			if (str[0] == '-')
 			{
-				str = str.substr(1);
+				key = 1;
 				this->mark = false;
 			}
 			else
 				this->mark = true;
 			this->Data = List();
-			for (long long i = str.length(); i > 0; i -= 9)
+			for (long long i = str.length(); i > key; i -= 9)
 			{
-				if (i < 9)
+				if (i < 9 + key)
 				{
-					Data.Append(atoi(str.substr(0, i).c_str()));
+					Data.Append(atoi(str.substr(key, i).c_str()));
 				}
 				else
 					Data.Append(atoi(str.substr(i - 9, 9).c_str()));
@@ -53,7 +54,7 @@ public:
 		RemoveZeroes();
 	}
 
-		BigInt& operator=(int64_t Int)
+	BigInt& operator=(int64_t Int)
 	{
 		Data.Clear();
 		if (Int < 0)
