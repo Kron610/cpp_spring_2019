@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include <mutex>
 #include <thread>
-constexpr auto COUNT = 500000;
+constexpr size_t COUNT = 500000;
 std::mutex mutex;
 std::mutex mutex2;
 void Ping()
